@@ -1,0 +1,25 @@
+QMainWindow {
+    background-color: #f0f0f0;
+}
+
+QPushButton {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 5px;
+}
+
+QPushButton:hover {
+    background-color: #45a049;
+}
+
+QListWidget, QTextEdit {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+}
