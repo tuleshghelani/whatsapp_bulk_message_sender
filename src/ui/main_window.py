@@ -43,10 +43,10 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
 
         self.whatsapp_view = None
-        self.is_logged_in = False  # Add this line
+        self.is_logged_in = False
 
     def send_messages(self):
-        if not self.is_logged_in:  # Change this line
+        if not self.is_logged_in:
             QMessageBox.warning(self, "Not Logged In", "Please log in to WhatsApp Web first.")
             return
 
@@ -71,8 +71,11 @@ class MainWindow(QMainWindow):
         else:
             self.whatsapp_view.show()
             self.login_button.setText("Hide WhatsApp")
+            self.is_logged_in = self.whatsapp_view.is_logged_in()
 
     def handle_login_status_change(self, is_logged_in):
-        self.is_logged_in = is_logged_in  # Add this line
-        # Implement any additional login status change handling logic here
-        pass
+        self.is_logged_in = is_logged_in
+        if is_logged_in:
+            QMessageBox.information(self, "Login Status", "Successfully logged in to WhatsApp Web.")
+        else:
+            QMessageBox.warning(self, "Login Status", "Logged out from WhatsApp Web.")

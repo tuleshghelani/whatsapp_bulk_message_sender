@@ -56,5 +56,17 @@ class WhatsAppWebView(QWidget):
             logger.info("WhatsApp Web loaded successfully.")
 
     def check_login_status(self):
-        # Implement login status check logic here
-        pass
+        self.page.runJavaScript(
+            "document.getElementsByClassName('_1XkO3').length > 0",
+            self.update_login_status
+        )
+
+    def update_login_status(self, result):
+        is_logged_in = bool(result)
+        if is_logged_in != self.is_logged_in:
+            self.is_logged_in = is_logged_in
+            self.login_status_changed.emit(self.is_logged_in)
+            logger.info(f"Login status changed: {'Logged in' if self.is_logged_in else 'Logged out'}")
+
+    def is_logged_in(self):
+        return self.is_logged_in
